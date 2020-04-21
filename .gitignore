@@ -141,3 +141,5 @@ cython_debug/
 # other:
 *.sqlite3
 
+*.idea
+
