@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
-from rentals.models import Address
+from rentals.models import Address, AddressCreationForm
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+
 
 
 
@@ -20,5 +23,6 @@ class Landlord(Basic_User):
 
 
 
-
+class UserRegisterForm(UserCreationForm):
+    address = forms.F
 

@@ -1,5 +1,7 @@
 from django.db import models
 from user.models import Basic_User, Landlord
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
 
 
 # ---- helper models -----------------
@@ -11,14 +13,14 @@ class Image(models.Model):
 
 
 class Address(models.Model):
+    # street = models.CharField(max_length=50)
+    # zip_code = models.CharField(max_length=6)
     country = models.CharField(max_length=20)
     state = models.CharField(max_length=20)
     city = models.CharField(max_length=50)
-    street = models.CharField(max_length=50)
-    street_address = models.CharField(max_length=10)
-    zip_code = models.CharField(max_length=6)
-
+    street_address = models.CharField(max_length=50)
 # -------------------------------------------------
+
 
 
 class Property(models.Model):
@@ -45,3 +47,13 @@ class Feedback(models.Model):
 
 
 
+class AddressCreationForm(forms.ModelForm):
+    class Meta:
+        model = Address
+        fields = ['country', 'state', 'city', 'street address']
+
+
+class FeedbackCreationForm(forms.ModelForm):
+    class Meta:
+        model = Feedback
+        fields = ['rating', 'comment']
