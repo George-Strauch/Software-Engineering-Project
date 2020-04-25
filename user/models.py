@@ -16,15 +16,11 @@ class UserProfile(models.Model):
     address = models.ForeignKey(Address, on_delete=models.CASCADE)
     is_landlord = models.BooleanField(default=False)
 
-    def save(self, commit=True):
-        # Save the provided password in hashed format
-        user = super().save(commit=False)
-        user.first_name = self.cleaned_data['first_name']
-        user.last_name = self.cleaned_data['last_name']
-        mid_inital = self.cleaned_data['mid_initial']           # some of these may not be needed
 
-        if commit:
-            user.save()
-        return user
+    def __str__(self):
+        return f'user profile for: {self.user.username}'
+
+    def save(self):
+        super().save()
 
 

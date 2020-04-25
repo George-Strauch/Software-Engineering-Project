@@ -16,26 +16,27 @@ class MakeUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
-#         'dl_number', 'address', 'password1', 'password2'
 
 
 
 class UserUpdateForm(ModelForm):
     class Meta:
         model = User
-        fields = ('first_name', 'last_name',  'email',)
+        fields = ('first_name', 'last_name',  'email')
+
+
+
+class MakeProfileForm(ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ('mid_initial', 'dl_number', 'address', 'is_landlord')   # todo: upload pfp?
 
 
 
 class UpdateProfileForm(ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('dl_number', 'address')   # todo: upload pfp?
-
-
-
-
-
+        fields = ('mid_initial', 'dl_number', 'address')   # todo: upload pfp?
 
 
 

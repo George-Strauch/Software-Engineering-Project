@@ -7,14 +7,14 @@ from .models import *
 class AddressForm(ModelForm):
     class Meta:
         model = Address
-        fields = ['country', 'state', 'city', 'street address']
+        fields = ('country', 'state', 'city', 'street address')
 
 
 
 class FeedbackForm(ModelForm):
     class Meta:
         model = Feedback
-        fields = ['rating', 'comment']
+        fields = ('rating', 'comment')
 
 
 
