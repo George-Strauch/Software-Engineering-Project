@@ -1,7 +1,6 @@
 from django.db import models
-from user.models import Basic_User, Landlord
-from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from user.models import UserProfile
+
 
 
 # ---- helper models -----------------
@@ -18,21 +17,21 @@ class Address(models.Model):
     country = models.CharField(max_length=20)
     state = models.CharField(max_length=20)
     city = models.CharField(max_length=50)
-    street_address = models.CharField(max_length=50)
+    street_address = models.CharField(max_length=150)
 # -------------------------------------------------
 
 
 
 class Property(models.Model):
     property_description = models.TextField()
-    posted_by = models.ForeignKey(Landlord, on_delete=models.CASCADE)
+    posted_by = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     address = models.ForeignKey(Address, on_delete=models.CASCADE)
     price_per_day = models.IntegerField()
 
 
 
 class Reservation(models.Model):
-    renter = models.ForeignKey(Basic_User, models.CASCADE)
+    renter = models.ForeignKey(UserProfile, models.CASCADE)
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
     start_date = models.DateField()
     end_date = models.DateField()
@@ -46,14 +45,3 @@ class Feedback(models.Model):
     reservation = models.OneToOneField(Reservation, on_delete=models.CASCADE)
 
 
-
-class AddressCreationForm(forms.ModelForm):
-    class Meta:
-        model = Address
-        fields = ['country', 'state', 'city', 'street address']
-
-
-class FeedbackCreationForm(forms.ModelForm):
-    class Meta:
-        model = Feedback
-        fields = ['rating', 'comment']
