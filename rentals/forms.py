@@ -7,7 +7,7 @@ from .models import *
 class AddressForm(ModelForm):
     class Meta:
         model = Address
-        fields = ('country', 'state', 'city', 'street address')
+        fields = ('country', 'state', 'city', 'street_address')
 
 
 
