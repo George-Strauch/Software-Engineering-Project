@@ -18,7 +18,7 @@ def rent_property(request):
     return HttpResponse('hello')  # todo
 
 
-def create_posting(request):
+def create_property(request):
     return HttpResponse('hello')  # todo
 
 

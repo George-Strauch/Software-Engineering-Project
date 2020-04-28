@@ -33,6 +33,11 @@ def view_profile(request):
     return HttpResponse('hello')  #
 
 
+def sign_in(request):
+    return render(request, 'users/signin.html')
+
+
+
 #
 # @login_required
 # def edit_profile(request):
@@ -59,10 +64,3 @@ def view_profile(request):
     # return render(request, 'users/edit_profile.html', context)     todo: create html file
     return HttpResponse('hello')  #
 
-
-def sign_in(request):
-    comtext = {
-        'user': request.user,
-    }
-    # return render(request, 'users/sign_in.html', {'form': form})     todo: create html file
-    return HttpResponse('hello')  # todo

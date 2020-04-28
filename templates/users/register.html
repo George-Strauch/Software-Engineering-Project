@@ -1,31 +1,55 @@
 <!-- This snippet uses Font Awesome 5 Free as a dependency. You can download it at fontawesome.io! -->
+{% include "rentals/base.html" %}
 
 <body>
   <div class="container">
     <div class="row">
       <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-        <div class="card card-signin my-5">
+        <div class="card card-sign-in my-5">
           <div class="card-body">
-            <h5 class="card-title text-center">Sign In</h5>
-            <form class="form-signin">
-              <div class="form-label-group">
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-                <label for="inputEmail">Email address</label>
-              </div>
+            <h5 class="card-title text-center">Sign Up</h5>
+
+            <hr>
+
+            <form class="form-sign-in">
+
+              <div class="form-group">
+                 <label>Account Type</label>
+                  <select class="form-control">
+                   <option selected>Renter</option>
+                   <option>Property Owner</option>
+                 </select>
+               </div>
+
+                <hr>
 
               <div class="form-label-group">
+                <label for="inputUsername">Username*</label>
+                <input type="username" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
+              </div>
+
+                <br>
+
+              <div class="form-label-group">
+                <label for="inputPassword">Password*</label>
                 <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                <label for="inputPassword">Password</label>
               </div>
 
-              <div class="custom-control custom-checkbox mb-3">
-                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                <label class="custom-control-label" for="customCheck1">Remember password</label>
+                <br>
+
+              <div class="form-label-group">
+                <label for="inputPassword">Confirm Password*</label>
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
               </div>
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
-              <hr class="my-4">
-              <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign in with Google</button>
-              <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button>
+
+                <hr>
+
+              {% include 'users/nameForm.html' %}
+
+                <hr>
+
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign Up</button>
+
             </form>
           </div>
         </div>
