@@ -1,8 +1,8 @@
-{% include "rentals/base.html" %}
+{% extends "rentals/base.html" %}
 
 
 
-{% block content %}
+{% block bodyContent %}
     <h1></h1>
 
     {% for posting in properties %}
@@ -29,10 +29,12 @@
         </body>
     {% endfor %}
 
-{% endblock content %}
+{% endblock  %}
 
-
-
+{% block navContent %}
+{#    change depending if logged in  #}
+{% include 'users/login_signup_nav.html' %}
+{% endblock %}
 
 
 

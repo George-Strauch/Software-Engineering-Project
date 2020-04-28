@@ -1,59 +1,110 @@
 <!-- This snippet uses Font Awesome 5 Free as a dependency. You can download it at fontawesome.io! -->
-{% include "rentals/base.html" %}
+{% extends "rentals/base.html" %}
+{% load crispy_forms_tags %}
 
-<body>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-        <div class="card card-sign-in my-5">
-          <div class="card-body">
-            <h5 class="card-title text-center">Sign Up</h5>
 
-            <hr>
+{% block bodyContent %}
 
-            <form class="form-sign-in">
+    <body>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-sign-in my-5">
+              <div class="card-body">
+                <h5 class="card-title text-center">Sign Up</h5>
 
-              <div class="form-group">
-                 <label>Account Type</label>
-                  <select class="form-control">
-                   <option selected>Renter</option>
-                   <option>Property Owner</option>
-                 </select>
-               </div>
+                  <form method='POST'>
+                      <hr>
+                      {% csrf_token %}
 
-                <hr>
+                      <fieldset class="form-group">
+                          {{ u_form|crispy }}
+                      </fieldset>
+                      <hr>
+                      <br>
 
-              <div class="form-label-group">
-                <label for="inputUsername">Username*</label>
-                <input type="username" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
+                      <fieldset class="form-group">
+                          {{ p_form|crispy }}
+                      </fieldset>
+                      <hr>
+                      <br>
+
+
+                      <fieldset class="form-group">
+                          {{ address_form|crispy }}
+                      </fieldset>
+                      <hr>
+                      <br>
+
+                      <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign Up</button>
+                  </form>
               </div>
-
-                <br>
-
-              <div class="form-label-group">
-                <label for="inputPassword">Password*</label>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-              </div>
-
-                <br>
-
-              <div class="form-label-group">
-                <label for="inputPassword">Confirm Password*</label>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-              </div>
-
-                <hr>
-
-              {% include 'users/nameForm.html' %}
-
-                <hr>
-
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign Up</button>
-
-            </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</body>
+    </body>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{#                <form class="form-sign-in">#}
+{##}
+{#                  <div class="form-group">#}
+{#                     <label>Account Type</label>#}
+{#                      <select class="form-control">#}
+{#                       <option selected>Renter</option>#}
+{#                       <option>Property Owner</option>#}
+{#                     </select>#}
+{#                   </div>#}
+{##}
+{#                    <hr>#}
+{##}
+{#                  <div class="form-label-group">#}
+{#                    <label for={{ u_form.username }}>Username*</label>#}
+{#                    <input type="username" id="inputUsername" class="form-control" placeholder="Username" required autofocus>#}
+{#                  </div>#}
+{##}
+{#                    <br>#}
+{##}
+{#                  <div class="form-label-group">#}
+{#                    <label for="inputPassword">Password*</label>#}
+{#                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>#}
+{#                  </div>#}
+{##}
+{#                    <br>#}
+{##}
+{#                  <div class="form-label-group">#}
+{#                    <label for="inputPassword">Confirm Password*</label>#}
+{#                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>#}
+{#                  </div>#}
+{##}
+{#                    <hr>#}
+{##}
+{#                  {% include 'users/nameForm.html' %}#}
+{##}
+{#                    <hr>#}
+{##}
+{#                  <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign Up</button>#}
+{##}
+{#                </form>#}

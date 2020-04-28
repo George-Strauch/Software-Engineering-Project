@@ -1,4 +1,5 @@
 {% load static %}
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,13 +30,9 @@
                   <a class="nav-link" href="/">Home</a>
                 </li>
 
-                <li class="nav-item">
-                  <a class="nav-link" href="/login">Login</a>
-                </li>
-
-                <li class="nav-item">
-                  <a class="nav-link" href="/register">Sign up</a>
-                </li>
+                {% block navContent %}
+                    {% include 'users/login_signup_nav.html' %}
+                {% endblock %}
 
               </ul>
             </div>
@@ -43,6 +40,16 @@
         </nav>
 <!-- /.container -->
     </header>
-
 </body>
+
+{% if messages %}
+    {% for m in messages %}
+        <div class="alert alert-{{ m.tags }}">
+        {{ m }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+{%block bodyContent %}{% endblock %}
+
 </html>

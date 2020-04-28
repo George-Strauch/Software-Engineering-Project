@@ -12,7 +12,6 @@ from .models import *
 # at 3:20 in
 class MakeUserForm(UserCreationForm):
     # https://stackoverflow.com/questions/5745197/django-create-custom-usercreationform
-
     class Meta:
         model = User
         fields = ('username', 'password1', 'password2')
@@ -21,24 +20,31 @@ class MakeUserForm(UserCreationForm):
 
 
 
-class MakeProfileForm(forms.Form):
+
+
+
+class MakeProfileForm(forms.ModelForm):
 
     first_name = forms.CharField(
         label=("First name"),
         max_length=30,
-        widget=forms.PasswordInput(attrs={'autocomplete': 'first-name'}),
+        widget=forms.TextInput(attrs={'autocomplete': 'first-name'}),
     )
 
     last_name = forms.CharField(
         label=("Last name"),
         max_length=150,
-        widget=forms.PasswordInput(attrs={'autocomplete': 'last-name'}),
+        widget=forms.TextInput(attrs={'autocomplete': 'last-name'}),
     )
-    email = forms.EmailField()
 
+    email = forms.EmailField()
     class Meta:
         model = UserProfile
-        fields = ('first_name', 'last_name',  'email', 'username', 'mid_initial', 'dl_number', 'address', 'is_landlord')   # todo: upload pfp?
+        fields = ('first_name', 'last_name', 'email', 'mid_initial', 'dl_number', 'is_landlord')   # todo: upload pfp?
+
+
+
+
 
 
 

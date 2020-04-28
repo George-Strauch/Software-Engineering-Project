@@ -1,32 +1,49 @@
 {#{% include "rentals/base.html" %}#}
+{% load crispy_forms_tags %}
 
 <hr>
 <form>
-  <div class="form-group">
-    <label for="inputAddress">Address</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+
+  <div class="form-row">
+
+    <div class="form-group">
+      <label for={{ address_form.street_address }}>Address</label>
+        {{ address_from.street_address }}
+    </div>
+
   </div>
+
+
 
   <div class="form-row">
 
     <div class="form-group col-md-6">
-      <label for="inputCity">City</label>
-      <input type="text" class="form-control" id="inputCity">
+      <label for={{ address_form.city.id_city }}>City</label>
+        {{ address_from.city|crispy }}
     </div>
 
     <div class="form-group col-md-4">
-      <label for="inputState">State</label>
-      <select id="inputState" class="form-control">
-        <option selected>Choose...</option>
-        <option>...</option>
-      </select>
+      <label for={{ address_form.state.id_state }}>State</label>
+        {{ address_from.state|crispy }}
     </div>
 
     <div class="form-group col-md-2">
-      <label for="inputZip">Zip</label>
-      <input type="text" class="form-control" id="inputZip">
+      <label for={{ address_form.zip.id_zip }}>Zip</label>
+        {{ address_from.zip|crispy }}
     </div>
 
   </div>
+
+  <div class="form-row">
+
+    <div class="form-group">
+      <label for={{ address_form.country.id_country }}>country</label>
+        {{ address_from.country|crispy }}
+    </div>
+
+  </div>
+
+
+
 </form>
 <hr>

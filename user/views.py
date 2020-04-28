@@ -4,23 +4,33 @@ from django.contrib import messages
 from django.http import HttpResponse
 from .models import *
 from .forms import *
+from rentals.forms import *
 
 
 def register_user(request):
+    print(request.method)
     if request.method == 'POST':
         u_form = MakeUserForm(request.POST)
         p_form = MakeProfileForm(request.POST)
-        if u_form.is_valid() and p_form.is_valid():
+        address_form = AddressForm(request.POST)
+        if u_form.is_valid():
+            print("valid")
+            u_form.save()
             username = u_form.cleaned_data.get('username')
             messages.success(request, f"{username} account created")
-            return redirect('home')
+            return redirect('rentals-home')
+        else:
+            pass
+
     else:
         u_form = MakeUserForm()
         p_form = MakeProfileForm()
+        address_form = AddressForm()
 
     context = {
         'u_form': u_form,
         'p_form': p_form,
+        'address_form': address_form
     }
     return render(request, 'users/register.html', context=context)
 
