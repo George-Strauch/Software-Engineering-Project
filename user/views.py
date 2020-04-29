@@ -13,19 +13,24 @@ def register_user(request):
         u_form = MakeUserForm(request.POST)
         p_form = MakeProfileForm(request.POST)
         address_form = AddressForm(request.POST)
-        if u_form.is_valid():
+        if u_form.is_valid() and p_form.is_valid():
             print("valid")
-            u_form.save()
+            u = u_form.save()
+            print(u.userprofile)
+            u.userprofile.is_landlord = p_form.clean().get('is_landlord')   #todo fix this
+            u.save()
             username = u_form.cleaned_data.get('username')
             messages.success(request, f"{username} account created")
             return redirect('rentals-home')
         else:
-            pass
+            print("there was a problem")
+            print(f'uform: {u_form.is_valid()}, pfrom: {p_form.is_valid()}')
+            messages.error(request, f"account not created")
+            return redirect('register')
 
-    else:
-        u_form = MakeUserForm()
-        p_form = MakeProfileForm()
-        address_form = AddressForm()
+    u_form = MakeUserForm()
+    p_form = MakeProfileForm()
+    address_form = AddressForm()
 
     context = {
         'u_form': u_form,

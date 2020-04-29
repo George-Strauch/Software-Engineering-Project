@@ -1,8 +1,5 @@
 from django.db import models
-from user.models import UserProfile
-from .helper_models import Address
-
-
+from user.models import UserProfile, Address
 
 
 
@@ -35,4 +32,5 @@ class Feedback(models.Model):
 class Image(models.Model):
     Property = models.ForeignKey(Property, default=None, on_delete=models.CASCADE)
     img = models.ImageField(upload_to=None)
+
 

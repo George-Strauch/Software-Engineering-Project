@@ -4,13 +4,6 @@ from .models import *
 
 
 
-class AddressForm(ModelForm):
-    class Meta:
-        model = Address
-        fields = ('country', 'state', 'city', 'street_address')
-
-
-
 class FeedbackForm(ModelForm):
     class Meta:
         model = Feedback

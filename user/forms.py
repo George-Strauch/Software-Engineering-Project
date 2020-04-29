@@ -19,11 +19,15 @@ class MakeUserForm(UserCreationForm):
 
 
 
-
-
-
-
 class MakeProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ('is_landlord',)   # todo: upload pfp?
+
+
+
+
+class EditProfileForm(forms.ModelForm):
 
     first_name = forms.CharField(
         label=("First name"),
@@ -44,6 +48,10 @@ class MakeProfileForm(forms.ModelForm):
 
 
 
+class AddressForm(ModelForm):
+    class Meta:
+        model = Address
+        fields = ('country', 'state', 'city', 'street_address')
 
 
 
