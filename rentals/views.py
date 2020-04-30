@@ -79,21 +79,10 @@ def create_property(request):
                                             thumbnail=form.cleaned_data.get('thumbnail'),
                                             )
 
-                # f.address.street_address = a.street_address
-                # f.address.country = a.country
-                # f.address.city = a.city
-                # f.address.zip_code = a.zip_code
-                # f.address.state = a.state
-                #
-                #
-                # f.address.save()
-                # f.save()
-                # p = f
-
 
                 print(f'created property: {p}')
                 messages.success(request, f"{p}")
-                return redirect('prop-detail', p.pk)
+                return redirect('list-listings')
 
             else:
                 messages.error(request, f" could not create property")
@@ -150,7 +139,7 @@ def edit_listing(request, listing_pk):
 
 
             messages.success(request, f"saved")
-            return redirect('prop-detail', listing_pk)
+            return redirect('list-listings')
         else:
             print('failed')
             messages.error(request, f"could not make reservation")
