@@ -29,8 +29,11 @@ urlpatterns = [
     path('', rv.home, name='rentals-home'),
     path('property/<prop_pk>', rv.view_property, name='prop-detail'),
     path('create_property/', rv.create_property, name='prop-create'),
+    path('my_listings/', rv.my_listings, name='list-listings'),
+    path('edit_listing/<int:listing_pk>', rv.edit_listing, name='edit-listing'),
     path('create_reservation/<prop_pk>', rv.rent_property, name='res-create'),
     path('register/', uv.register_user, name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='users/signin.html'), name='login'),
+    path('profile/', uv.edit_profile, name='edit-profile'),
     path('logout/', auth_views.LogoutView.as_view(template_name='rentals/home.html'), name='logout'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

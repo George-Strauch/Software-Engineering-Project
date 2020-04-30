@@ -19,69 +19,43 @@ class MakeUserForm(UserCreationForm):
 
 
 
-class MakeProfileForm(forms.ModelForm):
-    class Meta:
-        model = UserProfile
-        fields = ('is_landlord',)   # todo: upload pfp?
+# class MakeProfileForm(forms.ModelForm):
+#     class Meta:
+#         model = UserProfile
+#         fields = ('is_landlord',)   # todo: upload pfp?
 
+
+
+
+class MakeProfileForm(forms.Form):
+    property_owner = forms.BooleanField(required=False, )
+    class Meta:
+        fields = ('property_owner',)
 
 
 
 class EditProfileForm(forms.ModelForm):
-
-    first_name = forms.CharField(
-        label=("First name"),
-        max_length=30,
-        widget=forms.TextInput(attrs={'autocomplete': 'first-name'}),
-    )
-
-    last_name = forms.CharField(
-        label=("Last name"),
-        max_length=150,
-        widget=forms.TextInput(attrs={'autocomplete': 'last-name'}),
-    )
-
-    email = forms.EmailField()
     class Meta:
         model = UserProfile
-        fields = ('first_name', 'last_name', 'email', 'mid_initial', 'dl_number', 'is_landlord')   # todo: upload pfp?
+        fields = ('mid_initial', 'dl_number',)   # todo: upload pfp?
+
+
+
+class PfpForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ('pfp',)
 
 
 
 class AddressForm(ModelForm):
     class Meta:
         model = Address
-        fields = ('country', 'state', 'city', 'street_address')
+        fields = ('country', 'state', 'city', 'street_address', 'zip_code')
 
 
 
-
-
-
-
-# class UpdateProfileForm(ModelForm):
-#     class Meta:
-#         model = UserProfile
-#         fields = ('first_name', 'last_name',  'email', 'username', 'first_name', 'last_name', 'password')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+class EditUserForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email',)

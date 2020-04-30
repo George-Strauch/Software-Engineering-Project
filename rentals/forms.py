@@ -16,6 +16,12 @@ class PropertyForm(ModelForm):
         fields = ('property_description', 'price_per_day', 'thumbnail')
 
 
+class EditListing(ModelForm):
+    class Meta:
+        model = Property
+        fields = ('property_description', 'price_per_day', 'thumbnail')
+
+
 
 class ReservationForm(ModelForm):
     class Meta:

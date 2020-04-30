@@ -1,7 +1,5 @@
-<!-- This snippet uses Font Awesome 5 Free as a dependency. You can download it at fontawesome.io! -->
 {% extends "rentals/base.html" %}
 {% load crispy_forms_tags %}
-
 
 {% block bodyContent %}
 
@@ -11,25 +9,24 @@
           <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div class="card card-sign-in my-5">
               <div class="card-body">
-                <h5 class="card-title text-center">Sign Up</h5>
+                <h5 class="card-title text-center">Edit Listing</h5>
 
-                  <form method='POST' enctype="multipart/form-data">
+                  <form method="POST" enctype="multipart/form-data">
                       <hr>
 
                       {% csrf_token %}
 
                       <fieldset class="form-group">
-                          {{ u_form|crispy }}
+                          {{ form|crispy }}
                       </fieldset>
                       <hr>
 
                       <fieldset class="form-group">
-                          {{ p_form|crispy }}
+                          {{ address|crispy }}
                       </fieldset>
                       <hr>
 
-
-                      <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign Up</button>
+                      <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">make changes</button>
                   </form>
               </div>
             </div>

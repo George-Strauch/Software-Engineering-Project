@@ -12,12 +12,11 @@ def register_user(request):
         u_form = MakeUserForm(request.POST)
         p_form = MakeProfileForm(request.POST)
         if u_form.is_valid() and p_form.is_valid():
-
             u = u_form.save()
-            p = p_form.save()
 
-            p.user = u
-            p.save()
+            # prof = UserProfile.objects.create(user=u, is_landlord=p_form.cleaned_data.get('boolf'))
+            u.userprofile.is_landlord = p_form.cleaned_data.get('property_owner')
+            u.userprofile.save()
             u.save()
 
             print(u.userprofile)
@@ -58,29 +57,40 @@ def sign_in(request):
 
 
 
-#
-# @login_required
-# def edit_profile(request):
-#     if request == 'POST':
-#         u_form = UserUpdateForm(request.POST, instance=request.user)
-#         p_form = UpdateProfileForm(request.POST, instance=request.user)
-#         if u_form.is_valid() and p_form.is_valid():
-#             u_form.save()
-#             p_form.save()
-#             messages.success(request, f"success")
-#             return redirect('home')
-#         else:
-#             messages.success(request, "failed, not saved")
-#
-#     else:
-#         u_form = UserUpdateForm(instance=request.user)
-#         p_form = UpdateProfileForm(instance=request.user)
-#
-#     comtext = {
-#         'u_form': u_form,
-#         'p_form': p_form,
-#     }
 
-    # return render(request, 'users/edit_profile.html', context)     todo: create html file
-    return HttpResponse('hello')  #
+@login_required
+def edit_profile(request):
+    print(request.method)
+    if request.method == 'POST':
+        u_form = EditUserForm(request.POST, instance=request.user)
+        pfp_form = PfpForm(request.POST, request.FILES, instance=request.user.userprofile)
+        p_form = EditProfileForm(request.POST, instance=request.user.userprofile)
+        a_form = AddressForm(request.POST, instance=request.user.userprofile.address)
 
+        if u_form.is_valid() and p_form.is_valid() and a_form.is_valid() and pfp_form.is_valid():
+            a_form.save()
+            pfp_form.save()
+            p_form.save()
+            u_form.save()
+
+            messages.success(request, f"success")
+            print('changes made')
+            return redirect('rentals-home')
+        else:
+            messages.success(request, "failed, not saved")
+            print('changes not made')
+            return redirect('rentals-home')
+
+    else:
+        u_form = EditUserForm(instance=request.user)
+        p_form = EditProfileForm(instance=request.user.userprofile)
+        a_form = AddressForm(instance=request.user.userprofile.address)
+        pfp_form = PfpForm(instance=request.user.userprofile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form,
+        'a_form': a_form,
+        'pfp_form': pfp_form,
+    }
+    return render(request, 'users/edit_user.html', context)

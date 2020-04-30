@@ -8,9 +8,8 @@
 # @receiver(post_save, sender=Property)
 # def create_property_posting(sender, instance, created, **kwargs):
 #     if created:
-#         Property.objects.create(Proper2=instance)
-#
-#
-# @receiver(post_save, sender=User)
-# def save_profile(sender, instance, **kwargs):
-#     instance.save()
+#         a = Address.objects.create()
+#         Property.objects.create(address=a)
+#         instance.address.super().save()
+#     instance.u_save()
+
