@@ -1,0 +1,31 @@
+{% extends 'rentals/base.html' %}
+
+{% block bodyContent %}
+    <div class="container">
+        <h1 class="my-4">{{ property.address }}</h1>
+      <!-- Portfolio Item Row -->
+      <div class="row">
+
+        <div class="col-md-8">
+          <img class="img-fluid" src= "{{ property.thumbnail.url }}" alt="">
+        </div>
+        <div class="col-md-4">
+          <p>{{ property.property_description }}</p>
+          <h3 class="my-3">Details</h3>
+          <ul>
+            <li>$view {{ property.price_per_day }}.00 Per day</li>
+            <li>Owner: {{ property.posted_by.user.username }}</li>
+
+          </ul>
+          <a class="btn btn-primary" href="{%  url 'res-create' property.id %}">Reserve</a>
+        </div>
+
+      </div>
+    </div>
+
+{% endblock %}
+
+
+
+
+

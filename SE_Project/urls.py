@@ -19,6 +19,10 @@ from django.urls import path, include
 from user import views as uv
 from rentals import views as rv
 
+from django.conf import settings
+from django.conf.urls.static import static
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,4 +33,4 @@ urlpatterns = [
     path('register/', uv.register_user, name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='users/signin.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='rentals/home.html'), name='logout'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

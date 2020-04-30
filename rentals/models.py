@@ -1,6 +1,7 @@
 from django.db import models
 from user.models import UserProfile, Address
 from django.urls import reverse
+from PIL import Image
 
 
 
@@ -8,7 +9,7 @@ class Property(models.Model):
     thumbnail = models.ImageField(upload_to='property_images', null=True)
     property_description = models.TextField(null=True)
     posted_by = models.ForeignKey(UserProfile, null=True, on_delete=models.CASCADE)
-    address = models.ForeignKey(Address, on_delete=models.CASCADE, null=True)
+    address = models.ForeignKey(Address, on_delete=models.CASCADE, null=True, )
     price_per_day = models.IntegerField(null=True)
 
     def __str__(self):
@@ -16,6 +17,18 @@ class Property(models.Model):
 
     def get_absolute_url(self):
         return reverse('prop-details', kwargs={'pk': self.pk})
+
+    def save(self):
+        super().save()  # saving image first
+
+        img = Image.open(self.thumbnail.path)  # Open image using self
+
+        if img.height > 300 or img.width > 300:
+            new_img = (300, 300)
+            img.thumbnail(new_img)
+            img.save(self.thumbnail.path)  # saving image at the same path
+
+
 
 
 

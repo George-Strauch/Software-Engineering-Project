@@ -14,12 +14,13 @@ def home(request):
     return render(request, 'rentals/home.html', context=context)  # todo
 
 
+
 @login_required
 def view_property(request, prop_pk):
     context = {
         'property': Property.objects.get(pk=prop_pk)
     }
-    return render(request, 'rentals/property_detail.html', context=context)
+    return render(request, 'rentals/property.html', context=context)
 
 
 
@@ -27,6 +28,11 @@ def view_property(request, prop_pk):
 @login_required
 def rent_property(request, property_pk):
     p = Property.objects.get(pk=property_pk)
+
+    if request.user == p.posted_by:
+        messages.error(request, 'you cannot rent your own property')
+        return redirect('prop-detail', property_pk)
+
 
     if request.method == 'POST':
         form = ReservationForm(request.POST)
@@ -55,22 +61,23 @@ def create_property(request):
         return redirect('rentals-home')
     else:
         if request.method == 'POST':
-            form = PropertyForm(request.POST)
+            form = PropertyForm(request.POST, request.FILES)
             address_form = AddressForm(request.POST)
 
             if form.is_valid() and address_form.is_valid():
                 p = form.save()
                 a = address_form.save()
                 p.address = a
+                p.posted_by = request.user.userprofile
                 p.save()
-                print(f'created_property: {p}')
+                print(f'created property: {p}')
                 messages.success(request, f"{p}")
                 return redirect('prop-detail', p.pk)
 
             else:
-                messages.error(request, f"could not make reservation")
-                print('there was a problem')
-                return redirect(request, 'prop-create')
+                messages.error(request, f" could not create property")
+                print(f'there was a problem... af{address_form.is_valid()},   form:{form.is_valid()}')
+                return redirect('prop-create')
 
         else:
             form = PropertyForm()

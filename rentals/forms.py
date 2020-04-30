@@ -13,7 +13,7 @@ class FeedbackForm(ModelForm):
 class PropertyForm(ModelForm):
     class Meta:
         model = Property
-        fields = ('property_description', 'price_per_day')
+        fields = ('property_description', 'price_per_day', 'thumbnail')
 
 
 
