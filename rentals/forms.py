@@ -1,4 +1,3 @@
-from user.models import UserProfile
 from django.forms import ModelForm
 from .models import *
 
@@ -14,7 +13,7 @@ class FeedbackForm(ModelForm):
 class PropertyForm(ModelForm):
     class Meta:
         model = Property
-        fields = ('property_description', 'address', 'price_per_day',)     # todo: upload photos
+        fields = ('property_description', 'price_per_day')
 
 
 

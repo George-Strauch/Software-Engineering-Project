@@ -29,10 +29,27 @@
                 <li class="nav-item active">
                   <a class="nav-link" href="/">Home</a>
                 </li>
+              
+                {% if user.is_authenticated %}
+                    {% if user.userprofile.get_landlord %}
+                        {% include 'users/landlordNav.html' %}
+                    {% else %}
+                        {% include 'users/userNav.html' %}
+                    {% endif %}
 
-                {% block navContent %}
+
+                {% else %}
                     {% include 'users/login_signup_nav.html' %}
-                {% endblock %}
+                {% endif %}
+
+                <li class="nav-item">
+                  <a class="nav-link" href="/admin" target="_blank">Admin</a>
+                </li>
+
+
+{#                {% block navContent %}#}
+{#                    {% include 'users/login_signup_nav.html' %}#}
+{#                {% endblock %}#}
 
               </ul>
             </div>

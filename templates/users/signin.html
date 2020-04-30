@@ -1,42 +1,103 @@
 {% extends "rentals/base.html" %}
+{% load crispy_forms_tags %}
 
 {% block bodyContent %}
 
-<body>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-        <div class="card card-sign-in my-5">
-          <div class="card-body">
-            <h5 class="card-title text-center">Login</h5>
+    <body>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-sign-in my-5">
+              <div class="card-body">
+                <h5 class="card-title text-center">Login</h5>
 
-            <hr>
+                  <form method='POST'>
+                      <hr>
+                      {% csrf_token %}
 
-            <form class="form-sign-in">
+                      <fieldset class="form-group">
+                          {{ form|crispy }}
+                      </fieldset>
+                      <hr>
 
-
-              <div class="form-label-group">
-                <label for="inputUsername">Username</label>
-                <input type="username" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
+                      <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">login</button>
+                  </form>
               </div>
-
-                <br>
-
-              <div class="form-label-group">
-                <label for="inputPassword">Password</label>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-              </div>
-
-                <hr>
-
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Login</button>
-
-            </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</body>
+    </body>
 
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{##}
+{#{% block bodyContent %}#}
+{##}
+{#<body>#}
+{#  <div class="container">#}
+{#    <div class="row">#}
+{#      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">#}
+{#        <div class="card card-sign-in my-5">#}
+{#          <div class="card-body">#}
+{#            <h5 class="card-title text-center">Login</h5>#}
+{##}
+{#            <hr>#}
+{##}
+{#            <form class="form-sign-in">#}
+{##}
+{##}
+{#              <div class="form-label-group">#}
+{#                <label for="inputUsername">Username</label>#}
+{#                <input type="username" id="inputUsername" class="form-control" placeholder="Username" required autofocus>#}
+{#              </div>#}
+{##}
+{#                <br>#}
+{##}
+{#              <div class="form-label-group">#}
+{#                <label for="inputPassword">Password</label>#}
+{#                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>#}
+{#              </div>#}
+{##}
+{#                <hr>#}
+{##}
+{#              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Login</button>#}
+{##}
+{#            </form>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#    </div>#}
+{#  </div>#}
+{#</body>#}
+{##}
+{#{% endblock %}#}

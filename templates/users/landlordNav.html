@@ -1,16 +1,15 @@
 <li class="nav-item">
-    <a class="nav-link" href="/register">Create Listing</a>
+    <a class="nav-link" href={% url 'prop-create' %}>Create Listing</a>
 </li>
 
 <li class="nav-item">
-    <a class="nav-link" href="/register">My Reservations</a>
+    <a class="nav-link" href={% url 'rentals-home' %}>My Reservations</a>
 </li>
 
 <li class="nav-item">
-    <a class="nav-link" href="/">Profile</a>
+    <a class="nav-link" href={% url 'rentals-home' %}>Profile</a>
 </li>
 
 <li class="nav-item">
-    <a class="nav-link" href="/register">Logout</a>
+    <a class="nav-link" href={% url 'logout' %}>Logout</a>
 </li>
-

@@ -4,7 +4,6 @@ from django.contrib import messages
 from django.http import HttpResponse
 from .models import *
 from .forms import *
-from rentals.forms import *
 
 
 def register_user(request):
@@ -12,20 +11,24 @@ def register_user(request):
     if request.method == 'POST':
         u_form = MakeUserForm(request.POST)
         p_form = MakeProfileForm(request.POST)
-        address_form = AddressForm(request.POST)
         if u_form.is_valid() and p_form.is_valid():
-            print("valid")
+
             u = u_form.save()
-            print(u.userprofile)
-            u.userprofile.is_landlord = p_form.clean().get('is_landlord')   #todo fix this
+            p = p_form.save()
+
+            p.user = u
+            p.save()
             u.save()
-            username = u_form.cleaned_data.get('username')
+
+            print(u.userprofile)
+            username = u.username
+            print(f'{username} created... {u.userprofile}')
             messages.success(request, f"{username} account created")
             return redirect('rentals-home')
         else:
             print("there was a problem")
             print(f'uform: {u_form.is_valid()}, pfrom: {p_form.is_valid()}')
-            messages.error(request, f"account not created")
+            messages.error(request, f"account not created, there was a problem... try using a different username")
             return redirect('register')
 
     u_form = MakeUserForm()
@@ -40,12 +43,14 @@ def register_user(request):
     return render(request, 'users/register.html', context=context)
 
 
+
 @login_required
 def view_profile(request):
     comtext = {
         'user': request.user,
     }    # return render(request, 'users/profile.html', {'form': form})     todo: create html file
     return HttpResponse('hello')  #
+
 
 
 def sign_in(request):
